@@ -1,0 +1,27 @@
+你正在开发一个短视频平台的 AI 智能客服系统。项目使用 FastAPI + Anthropic Claude API + Chroma 向量数据库。
+
+## 技术约定
+- Python 3.11+，所有函数使用 type hints
+- 异步优先（async/await），FastAPI 使用 async handlers
+- 配置通过环境变量读取，不硬编码
+- 所有 LLM 调用走 Anthropic SDK，启用 prompt caching
+- 数据库使用 SQLAlchemy 2.0 async + SQLite（开发）/ PostgreSQL（生产）
+
+## 代码风格
+- 关键业务逻辑用中文注释说明 WHY，不注释 WHAT
+- 每个模块有 __init__.py 导出公开接口
+- 错误处理：自定义异常类，全局异常中间件
+- 日志：structlog 结构化日志
+
+## 项目架构
+- src/agent/ — Agent 核心（意图识别、工具调用、记忆）
+- src/rag/ — 知识库检索（向量化、检索、重排序）
+- src/api/ — FastAPI 路由与中间件
+- src/db/ — 数据模型与仓库层
+- src/utils/ — 配置、日志等工具
+
+## 领域知识（短视频平台客服）
+- 意图分类：账号问题、内容创作、变现相关、互动社交、平台功能
+- 用户角色：普通用户、创作者、广告主
+- 敏感信息：手机号、身份证、银行卡需脱敏
+- 关键指标：AI 解决率 ≥ 70%、首次响应 ≤ 30s
